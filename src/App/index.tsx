@@ -14,6 +14,7 @@ import {
   Theme,
   makeStyles,
   Toolbar,
+  Typography,
 } from "@material-ui/core";
 
 const drawerWidth = 240;
@@ -39,7 +40,7 @@ const useStyles = makeStyles((theme: Theme) =>
     content: {
       flexGrow: 1,
       backgroundColor: theme.palette.background.default,
-      padding: theme.spacing(3)
+      padding: theme.spacing(3),
     },
   })
 );
@@ -52,7 +53,9 @@ export function App() {
       <CssBaseline />
 
       <AppBar position="fixed" className={classes.appBar}>
-        <Toolbar>Тестовый сайт с MaterialUI</Toolbar>
+        <Toolbar>
+          <Typography variant="h6">Тестовый сайт с MaterialUI</Typography>
+        </Toolbar>
       </AppBar>
 
       <Drawer
@@ -63,13 +66,14 @@ export function App() {
         }}
         anchor="left"
       >
+        <Toolbar>
+          <Typography variant="h6">Роутер</Typography>
+        </Toolbar>
         <Divider />
         <List>
           {Pages.map((page, index) => (
             <ListItem button component={Link} to={page.link} key={index}>
-              <ListItemText>
-                {page.title}
-              </ListItemText>
+              <ListItemText>{page.title}</ListItemText>
             </ListItem>
           ))}
         </List>
