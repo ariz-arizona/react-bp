@@ -1,23 +1,37 @@
 import React from "react";
-
 interface Html {
+  html: string,
   scripts: Array<string>;
+  css: string;
 }
 
-export function Html({ children, scripts }: React.PropsWithChildren<Html>) {
+export function Html({
+  html,
+  scripts,
+  css,
+}: React.PropsWithChildren<Html>) {
   return (
     <html>
       <head>
         <meta charSet="UTF-8" />
         <meta
           name="viewport"
-          content="width=device-width,minimum-scale=1,maximum-scale=1,initial-scale=1"
+          content="minimum-scale=1, initial-scale=1, width=device-width"
         />
         <meta httpEquiv="X-UA-Compatible" content="ie=edge" />
         <title>React Starter Pack</title>
+        <link
+          rel="stylesheet"
+          href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
+        />
+        <link
+          rel="stylesheet"
+          href="https://fonts.googleapis.com/icon?family=Material+Icons"
+        />
+        <style id="jss-server-side">{css}</style>
       </head>
       <body>
-        <div id="root">{children}</div>
+        <div id="root" dangerouslySetInnerHTML={{ __html: html }} />
         {scripts.map((script, index) => (
           <script src={script} key={index} />
         ))}

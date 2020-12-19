@@ -5,6 +5,7 @@ import ReactDOMServer from "react-dom/server";
 import { StaticRouter } from "react-router";
 import { App } from "App";
 import { Html } from "./Html/Server";
+import { ServerStyleSheets } from "@material-ui/core";
 
 const port = 3000;
 const server = express();
@@ -17,12 +18,18 @@ fs.readdirSync("./dist/assets").forEach((file) => {
 server.use("/assets", express.static("./dist/assets"));
 
 server.get("*", async (req, res) => {
-  ReactDOMServer.renderToNodeStream(
-    <Html scripts={jsFiles}>
+  const sheets = new ServerStyleSheets();
+  const html = ReactDOMServer.renderToStaticMarkup(
+    sheets.collect(
       <StaticRouter location={req.url} context={{}}>
         <App />
       </StaticRouter>
-    </Html>
+    )
+  );
+  const css = sheets.toString();
+
+  return ReactDOMServer.renderToNodeStream(
+    <Html scripts={jsFiles} css={css} html={html}/>
   ).pipe(res);
 });
 

@@ -8,9 +8,19 @@ const renderFunction: ReactDOM.Renderer = entryBlock.hasChildNodes()
   ? ReactDOM.hydrate
   : ReactDOM.render;
 
-renderFunction(
-  <BrowserRouter>
-    <App />
-  </BrowserRouter>,
-  entryBlock
-);
+function Main() {
+  React.useEffect(() => {
+    const jssStyles = document.querySelector("#jss-server-side");
+    if (jssStyles) {
+      // jssStyles.parentElement.removeChild(jssStyles);
+    }
+  }, []);
+
+  return (
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
+  );
+}
+
+renderFunction(<Main />, entryBlock);
