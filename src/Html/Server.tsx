@@ -1,15 +1,11 @@
 import React from "react";
 interface Html {
-  html: string,
+  html: string;
   scripts: Array<string>;
   css: string;
 }
 
-export function Html({
-  html,
-  scripts,
-  css,
-}: React.PropsWithChildren<Html>) {
+export function Html({ html, scripts, css }: React.PropsWithChildren<Html>) {
   return (
     <html>
       <head>
@@ -28,7 +24,7 @@ export function Html({
           rel="stylesheet"
           href="https://fonts.googleapis.com/icon?family=Material+Icons"
         />
-        <style id="jss-server-side">{css}</style>
+        <style id="jss-server-side" dangerouslySetInnerHTML={{ __html: css }} />
       </head>
       <body>
         <div id="root" dangerouslySetInnerHTML={{ __html: html }} />

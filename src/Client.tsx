@@ -1,7 +1,11 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import { BrowserRouter } from "react-router-dom";
+import { ThemeProvider } from "@material-ui/core";
+
 import { App } from "App";
+
+import theme from "./theme";
 
 const entryBlock = document.getElementById("root");
 const renderFunction: ReactDOM.Renderer = entryBlock.hasChildNodes()
@@ -12,13 +16,15 @@ function Main() {
   React.useEffect(() => {
     const jssStyles = document.querySelector("#jss-server-side");
     if (jssStyles) {
-      // jssStyles.parentElement.removeChild(jssStyles);
+      jssStyles.parentElement.removeChild(jssStyles);
     }
   }, []);
 
   return (
     <BrowserRouter>
-      <App />
+      <ThemeProvider theme={theme}>
+        <App />
+      </ThemeProvider>
     </BrowserRouter>
   );
 }

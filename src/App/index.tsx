@@ -1,6 +1,5 @@
 import React from "react";
 import { Link, Switch, Route } from "react-router-dom";
-import CssBaseline from "@material-ui/core/CssBaseline";
 
 import { Pages } from "Pages/Routes";
 import {
@@ -15,6 +14,7 @@ import {
   makeStyles,
   Toolbar,
   Typography,
+  CssBaseline,
 } from "@material-ui/core";
 
 const drawerWidth = 240;
@@ -49,48 +49,49 @@ export function App() {
   const classes = useStyles();
 
   return (
-    <div className={classes.root}>
+    <>
       <CssBaseline />
+      <div className={classes.root}>
+        <AppBar position="fixed" className={classes.appBar}>
+          <Toolbar>
+            <Typography variant="h6">Тестовый сайт с MaterialUI</Typography>
+          </Toolbar>
+        </AppBar>
 
-      <AppBar position="fixed" className={classes.appBar}>
-        <Toolbar>
-          <Typography variant="h6">Тестовый сайт с MaterialUI</Typography>
-        </Toolbar>
-      </AppBar>
-
-      <Drawer
-        className={classes.drawer}
-        variant="permanent"
-        classes={{
-          paper: classes.drawerPaper,
-        }}
-        anchor="left"
-      >
-        <Toolbar>
-          <Typography variant="h6">Роутер</Typography>
-        </Toolbar>
-        <Divider />
-        <List>
-          {Pages.map((page, index) => (
-            <ListItem button component={Link} to={page.link} key={index}>
-              <ListItemText>{page.title}</ListItemText>
-            </ListItem>
-          ))}
-        </List>
-      </Drawer>
-      <main className={classes.content}>
-        <div className={classes.toolbar} />
-        <Switch>
-          {Pages.map((page, index) => (
-            <Route
-              exact
-              path={page.link}
-              component={page.component}
-              key={index}
-            />
-          ))}
-        </Switch>
-      </main>
-    </div>
+        <Drawer
+          className={classes.drawer}
+          variant="permanent"
+          classes={{
+            paper: classes.drawerPaper,
+          }}
+          anchor="left"
+        >
+          <Toolbar>
+            <Typography variant="h6">Роутер</Typography>
+          </Toolbar>
+          <Divider />
+          <List>
+            {Pages.map((page, index) => (
+              <ListItem button component={Link} to={page.link} key={index}>
+                <ListItemText>{page.title}</ListItemText>
+              </ListItem>
+            ))}
+          </List>
+        </Drawer>
+        <main className={classes.content}>
+          <div className={classes.toolbar} />
+          <Switch>
+            {Pages.map((page, index) => (
+              <Route
+                exact
+                path={page.link}
+                component={page.component}
+                key={index}
+              />
+            ))}
+          </Switch>
+        </main>
+      </div>
+    </>
   );
 }

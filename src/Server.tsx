@@ -3,9 +3,12 @@ import express from "express";
 import React from "react";
 import ReactDOMServer from "react-dom/server";
 import { StaticRouter } from "react-router";
+import { ServerStyleSheets, ThemeProvider } from "@material-ui/core";
+
 import { App } from "App";
 import { Html } from "./Html/Server";
-import { ServerStyleSheets } from "@material-ui/core";
+
+import theme from "./theme";
 
 const port = 3000;
 const server = express();
@@ -21,15 +24,17 @@ server.get("*", async (req, res) => {
   const sheets = new ServerStyleSheets();
   const html = ReactDOMServer.renderToStaticMarkup(
     sheets.collect(
-      <StaticRouter location={req.url} context={{}}>
-        <App />
-      </StaticRouter>
+      <ThemeProvider theme={theme}>
+        <StaticRouter location={req.url} context={{}}>
+          <App />
+        </StaticRouter>
+      </ThemeProvider>
     )
   );
   const css = sheets.toString();
 
   return ReactDOMServer.renderToNodeStream(
-    <Html scripts={jsFiles} css={css} html={html}/>
+    <Html scripts={jsFiles} css={css} html={html} />
   ).pipe(res);
 });
 
