@@ -6,9 +6,11 @@ import { StaticRouter } from "react-router";
 import { ServerStyleSheets, ThemeProvider } from "@material-ui/core";
 
 import { App } from "App";
-import { Html } from "./Html/Server";
 
+import { Html } from "./Html/Server";
 import theme from "./theme";
+
+import getTest from "./Tests";
 
 const port = 3000;
 const server = express();
@@ -19,6 +21,11 @@ fs.readdirSync("./dist/assets").forEach((file) => {
 });
 
 server.use("/assets", express.static("./dist/assets"));
+
+server.get("/test/:name", async (req, res) => {
+  const { name } = req.params;
+  res.json(await getTest(name));
+});
 
 server.get("*", async (req, res) => {
   const sheets = new ServerStyleSheets();

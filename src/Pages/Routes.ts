@@ -2,7 +2,7 @@ import { ComponentType } from 'react'
 import { RouteComponentProps } from 'react-router-dom'
 
 import { Home } from 'Pages/Home'
-import { Content } from 'Pages/Content'
+import { Tests } from 'Pages/Tests'
 
 interface Route {
   link: string
@@ -17,8 +17,8 @@ export const Pages: Array<Route> = [
     component: Home,
   },
   {
-    link: '/content',
-    title: 'Content',
-    component: Content,
+    link: '/tests',
+    title: 'Tests',
+    component: Tests,
   },
 ]

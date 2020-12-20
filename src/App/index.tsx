@@ -19,30 +19,32 @@ import {
 
 const drawerWidth = 240;
 
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    root: {
-      display: "flex",
-    },
-    appBar: {
-      width: `calc(100% - ${drawerWidth}px)`,
-      marginLeft: drawerWidth,
-    },
-    drawer: {
-      width: drawerWidth,
-      flexShrink: 0,
-    },
-    drawerPaper: {
-      width: drawerWidth,
-    },
-    // necessary for content to be below app bar
-    toolbar: theme.mixins.toolbar,
-    content: {
-      flexGrow: 1,
-      backgroundColor: theme.palette.background.default,
-      padding: theme.spacing(3),
-    },
-  }), { index : 1 }
+const useStyles = makeStyles(
+  (theme: Theme) =>
+    createStyles({
+      root: {
+        display: "flex",
+      },
+      appBar: {
+        width: `calc(100% - ${drawerWidth}px)`,
+        marginLeft: drawerWidth,
+      },
+      drawer: {
+        width: drawerWidth,
+        flexShrink: 0,
+      },
+      drawerPaper: {
+        width: drawerWidth,
+      },
+      // necessary for content to be below app bar
+      toolbar: theme.mixins.toolbar,
+      content: {
+        flexGrow: 1,
+        backgroundColor: theme.palette.background.default,
+        padding: theme.spacing(3),
+      },
+    }),
+  { index: 1 }
 );
 
 export function App() {
@@ -71,8 +73,8 @@ export function App() {
           </Toolbar>
           <Divider />
           <List>
-            {Pages.map((page, index) => (
-              <ListItem button component={Link} to={page.link} key={index}>
+            {Pages.map((page, i) => (
+              <ListItem button component={Link} to={page.link} key={i}>
                 <ListItemText>{page.title}</ListItemText>
               </ListItem>
             ))}
