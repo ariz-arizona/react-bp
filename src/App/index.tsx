@@ -42,7 +42,7 @@ const useStyles = makeStyles((theme: Theme) =>
       backgroundColor: theme.palette.background.default,
       padding: theme.spacing(3),
     },
-  })
+  }), { index : 1 }
 );
 
 export function App() {
