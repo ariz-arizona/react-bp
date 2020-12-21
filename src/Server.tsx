@@ -22,7 +22,7 @@ fs.readdirSync("./dist/assets").forEach((file) => {
 
 server.use("/assets", express.static("./dist/assets"));
 
-server.get("/test/:name", async (req, res) => {
+server.get("/api/test/:name", async (req, res) => {
   const { name } = req.params;
   res.json(await getTest(name));
 });

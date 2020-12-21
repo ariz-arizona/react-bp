@@ -11,7 +11,8 @@
     "paths": {
       // Указываем ссылки до директорий в проекте, чтобы каждый раз в импортах не писать относительные пути
       "App": ["src/App"],
-      "Pages/*": ["src/Pages/*"]
+      "Pages/*": ["src/Pages/*"],
+      "Tests/*": ["src/Tests/*"]
     }
   },
   "exclude": ["node_modules"]

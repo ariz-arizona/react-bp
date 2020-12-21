@@ -1,5 +1,14 @@
-import ErrorLogin from './Login/ErrorLogin';
-
-export const tests: any = {
-  ErrorLogin,
+// todo переделать систему именования
+interface Test {
+  link: string
+  title: string
+  apiLink: string
 }
+
+export const tests: Array<Test> = [
+  {
+    link: 'error-login',
+    title: 'Ошибочный логин',
+    apiLink: 'ErrorLogin',
+  }
+]

@@ -17,6 +17,9 @@ import {
   CssBaseline,
 } from "@material-ui/core";
 
+import { tests } from "../Tests/tests";
+import { Tests } from "Pages/Tests";
+
 const drawerWidth = 240;
 
 const useStyles = makeStyles(
@@ -50,6 +53,19 @@ const useStyles = makeStyles(
 export function App() {
   const classes = useStyles();
 
+  const routes: Array<JSX.Element> = [];
+  Pages.map((page, index) =>
+    routes.push(
+      <Route
+        exact
+        path={page.link}
+        component={page.component}
+        key={`page-${index}`}
+      />
+    )
+  );
+  routes.push(<Route exact path="/tests/:link" component={Tests} key="test" />);
+
   return (
     <>
       <CssBaseline />
@@ -74,24 +90,31 @@ export function App() {
           <Divider />
           <List>
             {Pages.map((page, i) => (
-              <ListItem button component={Link} to={page.link} key={i}>
-                <ListItemText>{page.title}</ListItemText>
-              </ListItem>
+              <>
+                <ListItem button component={Link} to={page.link} key={i}>
+                  <ListItemText>{page.title}</ListItemText>
+                </ListItem>
+                {page.link === "/tests" ? (
+                  <List component="div" disablePadding>
+                    {tests.map((test, j) => (
+                      <ListItem
+                        button
+                        component={Link}
+                        to={`${page.link}/${test.link}`}
+                        key={j}
+                      >
+                        <ListItemText>{test.title}</ListItemText>
+                      </ListItem>
+                    ))}
+                  </List>
+                ) : null}
+              </>
             ))}
           </List>
         </Drawer>
         <main className={classes.content}>
           <div className={classes.toolbar} />
-          <Switch>
-            {Pages.map((page, index) => (
-              <Route
-                exact
-                path={page.link}
-                component={page.component}
-                key={index}
-              />
-            ))}
-          </Switch>
+          <Switch>{routes}</Switch>
         </main>
       </div>
     </>

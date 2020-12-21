@@ -13,12 +13,12 @@ interface Route {
 export const Pages: Array<Route> = [
   {
     link: '/',
-    title: 'Home',
+    title: 'Главная',
     component: Home,
   },
   {
     link: '/tests',
-    title: 'Tests',
+    title: 'Тесты',
     component: Tests,
   },
 ]
