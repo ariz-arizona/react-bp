@@ -15,6 +15,7 @@ import {
   Toolbar,
   Typography,
   CssBaseline,
+  Collapse,
 } from "@material-ui/core";
 
 import { tests } from "../Tests/tests";
@@ -22,32 +23,32 @@ import { Tests } from "Pages/Tests";
 
 const drawerWidth = 240;
 
-const useStyles = makeStyles(
-  (theme: Theme) =>
-    createStyles({
-      root: {
-        display: "flex",
-      },
-      appBar: {
-        width: `calc(100% - ${drawerWidth}px)`,
-        marginLeft: drawerWidth,
-      },
-      drawer: {
-        width: drawerWidth,
-        flexShrink: 0,
-      },
-      drawerPaper: {
-        width: drawerWidth,
-      },
-      // necessary for content to be below app bar
-      toolbar: theme.mixins.toolbar,
-      content: {
-        flexGrow: 1,
-        backgroundColor: theme.palette.background.default,
-        padding: theme.spacing(3),
-      },
-    }),
-  { index: 1 }
+const useStyles = makeStyles((theme: Theme) =>
+  createStyles({
+    root: {
+      display: "flex",
+    },
+    appBar: {
+      width: `calc(100% - ${drawerWidth}px)`,
+      marginLeft: drawerWidth,
+    },
+    nested: {
+      paddingLeft: theme.spacing(4),
+    },
+    drawer: {
+      width: drawerWidth,
+      flexShrink: 0,
+    },
+    drawerPaper: {
+      width: drawerWidth,
+    },
+    toolbar: theme.mixins.toolbar,
+    content: {
+      flexGrow: 1,
+      backgroundColor: theme.palette.background.default,
+      padding: theme.spacing(3),
+    },
+  })
 );
 
 export function App() {
@@ -95,18 +96,21 @@ export function App() {
                   <ListItemText>{page.title}</ListItemText>
                 </ListItem>
                 {page.link === "/tests" ? (
-                  <List component="div" disablePadding>
-                    {tests.map((test, j) => (
-                      <ListItem
-                        button
-                        component={Link}
-                        to={`${page.link}/${test.link}`}
-                        key={j}
-                      >
-                        <ListItemText>{test.title}</ListItemText>
-                      </ListItem>
-                    ))}
-                  </List>
+                  <Collapse in={true} timeout="auto" unmountOnExit>
+                    <List component="div" disablePadding>
+                      {tests.map((test, j) => (
+                        <ListItem
+                          button
+                          component={Link}
+                          to={`${page.link}/${test.link}`}
+                          key={j}
+                          className={classes.nested}
+                        >
+                          <ListItemText>{test.title}</ListItemText>
+                        </ListItem>
+                      ))}
+                    </List>
+                  </Collapse>
                 ) : null}
               </>
             ))}

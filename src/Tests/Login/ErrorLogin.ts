@@ -11,7 +11,7 @@ export default async function ErrorLogin() {
 
     return {
       status: 'success',
-      data: screenshot
+      data: 'data:image/png;base64,' + screenshot
     }
   } catch (err) {
     return {
