@@ -75,6 +75,7 @@ const Tests = withStyles(styles)(
               loading: true,
               title: test.title,
               fetchUrl: `/api/test/${test.apiLink}`,
+              data: ""
             },
             this.getData
           );
