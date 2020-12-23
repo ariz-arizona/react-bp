@@ -12,7 +12,7 @@ import theme from "./theme";
 
 import getTest from "./Tests";
 
-const port = 5000;
+const port: number = parseInt(process.env.PORT, 10) || 3000;
 const server = express();
 const jsFiles: Array<string> = [];
 
