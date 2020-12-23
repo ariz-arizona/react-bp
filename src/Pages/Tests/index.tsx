@@ -3,15 +3,13 @@ import { RouteComponentProps } from "react-router-dom";
 
 import { Alert } from "@material-ui/lab";
 import {
-  Backdrop,
   Card,
   CardActionArea,
   CardContent,
-  CardMedia,
-  CircularProgress,
   Typography,
   withStyles,
 } from "@material-ui/core";
+import Image from "material-ui-image";
 
 import { tests } from "Tests/tests";
 
@@ -104,19 +102,17 @@ const Tests = withStyles(styles)(
       return (
         <Card className={classes.root}>
           <CardActionArea>
-            {loading ? (
-              <Backdrop open={true}>
-                <CircularProgress color="inherit" />
-              </Backdrop>
-            ) : (
-              <CardContent>
-                <Typography gutterBottom variant="h5" component="h2">
-                  Тест &laquo;{title}&raquo;
-                </Typography>
+            <CardContent>
+              <Typography gutterBottom variant="h5" component="h2">
+                Тест &laquo;{title}&raquo;
+              </Typography>
+              {loading ? (
+                <Alert severity="info">Тест в процессе</Alert>
+              ) : (
                 <Alert severity={status}>{AlertText}</Alert>
-              </CardContent>
-            )}
-            <CardMedia className={classes.media} image={data} />
+              )}
+            </CardContent>
+            <Image aspectRatio={4 / 3} src={data} />
           </CardActionArea>
         </Card>
       );
