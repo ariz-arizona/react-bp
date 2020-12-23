@@ -1,9 +1,12 @@
 import ErrorLogin from "./Login/ErrorLogin";
+import CompanyLogin from "./Login/CompanyLogin";
+
 import { tests } from "./tests";
 
 // todo сделать объектом
 const testModules:any = {
-  ErrorLogin
+  ErrorLogin,
+  CompanyLogin
 }
 
 async function getTest(name: string) {

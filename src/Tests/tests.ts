@@ -10,5 +10,10 @@ export const tests: Array<Test> = [
     link: 'error-login',
     title: 'Ошибочный логин',
     apiLink: 'ErrorLogin',
+  },
+  {
+    link: 'company-login',
+    title: 'Логин компании',
+    apiLink: 'CompanyLogin',
   }
 ]
