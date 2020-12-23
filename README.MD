@@ -6,4 +6,15 @@
 
 Используется [MATERIAL UI](https://material-ui.com/)
 
+## Особенности запуска
+
+Для запуска на heroku надо дополнительно настроить buildpacks
+
+```
+heroku buildpacks:add https://github.com/heroku/heroku-buildpack-chromedriver
+heroku buildpacks:add https://github.com/heroku/heroku-buildpack-google-chrome
+```
+
+Команда для запуска прописана в Procfile. (Плюс команда `heroku-prebuild` в `package.json`)
+
 ## TODO
