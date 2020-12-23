@@ -45,4 +45,4 @@ server.get("*", async (req, res) => {
   ).pipe(res);
 });
 
-server.listen(port, () => console.log(`Listening on port ${port}`));
+server.listen(port, '0.0.0.0', () => console.log(`Listening on port ${port}`));
