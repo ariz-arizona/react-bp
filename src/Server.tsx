@@ -12,7 +12,7 @@ import theme from "./theme";
 
 import getTest from "./Tests";
 
-const port = 3000;
+const port = 5000;
 const server = express();
 const jsFiles: Array<string> = [];
 
