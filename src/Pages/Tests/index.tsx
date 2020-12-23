@@ -55,6 +55,16 @@ const Tests = withStyles(styles)(
     };
 
     componentDidMount = () => {
+      this.getLink();
+    };
+
+    componentDidUpdate = (prevProps: Props) => {
+      if (this.props.match.params.link !== prevProps.match.params.link) {
+        this.getLink();
+      }
+    };
+
+    getLink = () => {
       const { match } = this.props;
       const { link } = match.params;
       if (link) {
