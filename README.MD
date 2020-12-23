@@ -18,3 +18,7 @@ heroku buildpacks:add https://github.com/heroku/heroku-buildpack-google-chrome
 Команда для запуска прописана в Procfile. (Плюс команда `heroku-prebuild` в `package.json`)
 
 ## TODO
+
+* сохранение скриншотов на диск и последующее их удаление
+* нормальный лоадер во время загрузки теста
+* добавить еще тестов
