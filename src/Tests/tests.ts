@@ -1,11 +1,11 @@
 // todo переделать систему именования
-interface Test {
+export interface TestInterface {
   link: string
   title: string
   apiLink: string
 }
 
-export const tests: Array<Test> = [
+export const tests: Array<TestInterface> = [
   {
     link: 'error-login',
     title: 'Ошибочный логин',

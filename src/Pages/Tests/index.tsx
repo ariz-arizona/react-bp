@@ -1,131 +1,58 @@
 import React, { Component } from "react";
-import { RouteComponentProps } from "react-router-dom";
-
-import { Alert } from "@material-ui/lab";
 import {
-  Card,
-  CardActionArea,
-  CardContent,
-  Typography,
+  Paper,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
   withStyles,
 } from "@material-ui/core";
-import Image from "material-ui-image";
 
 import { tests } from "Tests/tests";
 
-type State = {
-  loading: boolean;
-  title: string;
-  fetchUrl: string;
-  status: "error" | "success";
-  data: string;
-};
-interface MatchParams {
-  link: string;
-}
+import { TestsRow } from "./row";
 
+type State = {};
 interface StylesProps {
   // injected style props
   classes: {
-    root: string;
-    media: string;
+    table: string;
   };
 }
 
-type Props = RouteComponentProps<MatchParams> & StylesProps;
+type Props = StylesProps;
 
 const styles = {
-  root: {
-    maxWidth: 1200,
-  },
-  media: {
-    height: 0,
-    paddingTop: "75%", // 4:3 - 1600x1200
+  table: {
   },
 };
 
 const Tests = withStyles(styles)(
-  class extends Component<Props, State> {
-    state: Readonly<State> = {
-      loading: false,
-      title: "",
-      fetchUrl: "",
-      status: "error",
-      data: "",
-    };
-
-    componentDidMount = () => {
-      this.getLink();
-    };
-
-    componentDidUpdate = (prevProps: Props) => {
-      if (this.props.match.params.link !== prevProps.match.params.link) {
-        this.getLink();
-      }
-    };
-
-    getLink = () => {
-      const { match } = this.props;
-      const { link } = match.params;
-      if (link) {
-        const test = tests.find((el) => el.link === link);
-        if (test) {
-          this.setState(
-            {
-              loading: true,
-              title: test.title,
-              fetchUrl: `/api/test/${test.apiLink}`,
-              data: ""
-            },
-            this.getData
-          );
-        }
-      }
-    };
-
-    getData = () => {
-      fetch(this.state.fetchUrl)
-        .then((response) => {
-          return response.json();
-        })
-        .then((data) => {
-          this.setState({
-            loading: false,
-            status: data.result.status,
-            data: data.result.data,
-          });
-        });
-    };
+  class Tests extends Component<Props, State> {
+    state: Readonly<State> = {};
 
     render() {
       const { classes } = this.props;
-      const { loading, title, status, data } = this.state;
-      const AlertText = `Тест ${status === "success" ? "пройден" : "провален"}`;
-
-      if (!title) {
-        return (
-          <section className="content">
-            <h1>Тест не найден</h1>
-          </section>
-        );
-      }
 
       return (
-        <Card className={classes.root}>
-          <CardActionArea>
-            <CardContent>
-              <Typography gutterBottom variant="h5" component="h2">
-                Тест &laquo;{title}&raquo;
-              </Typography>
-              {loading ? (
-                <Alert severity="info">Тест в процессе</Alert>
-              ) : (
-                <Alert severity={status}>{AlertText}</Alert>
-              )}
-            </CardContent>
-            <Image aspectRatio={4 / 3} src={data} />
-          </CardActionArea>
-        </Card>
+        <TableContainer component={Paper}>
+          <Table className={classes.table}>
+            <TableHead>
+              <TableRow>
+                <TableCell>Название</TableCell>
+                <TableCell>Статус</TableCell>
+                <TableCell>Действия</TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {tests.map((test, j) => (
+                <TestsRow  key={j} {...test}/>
+              ))}
+            </TableBody>
+          </Table>
+        </TableContainer>
       );
     }
   }

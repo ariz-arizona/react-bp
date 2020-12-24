@@ -1,7 +1,6 @@
 import React from "react";
 import { Link, Switch, Route } from "react-router-dom";
 
-import { Pages } from "Pages/Routes";
 import {
   AppBar,
   Divider,
@@ -18,8 +17,9 @@ import {
   Collapse,
 } from "@material-ui/core";
 
-import { tests } from "../Tests/tests";
-import { Tests } from "Pages/Tests";
+import { OneTest } from "Pages/OneTest";
+import { Pages } from "Pages/Routes";
+import { tests } from "Tests/tests";
 
 const drawerWidth = 240;
 
@@ -65,7 +65,9 @@ export function App() {
       />
     )
   );
-  routes.push(<Route exact path="/tests/:link" component={Tests} key="test" />);
+  routes.push(
+    <Route exact path="/tests/:link" component={OneTest} key="test" />
+  );
 
   return (
     <>
